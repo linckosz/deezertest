@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+	<title>Deezer - Mini API</title>
+	<link rel="shortcut icon" href="[{ /favicon.ico }]" />
+	<link rel="icon" href="[{ /favicon.png }]" type="image/png" />
+	<link rel="apple-touch-icon" href="[{ /favicon.png }]" type="image/png" />
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-barstyle" content="default">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="date=no">
+	<meta name="format-detection" content="address=no">
+	<meta name="description" content="Mini API for Deezer" />
+	<meta name="Keywords" content="demo" />
+
+	<link rel="stylesheet" href="[{ /deezer/demo/styles/demo.css }]" type="text/css" />
+	<style type="text/css">
+		#body_deezer {
+			background-image: url("[{ /deezer/demo/images/background.png }]"), linear-gradient(140deg, #023762, #00719C) !important;
+		}
+	</style>
+
+	<script src="[{ /deezer/communication/scripts/divers.js }]" type="text/javascript"></script>
+	<script src="[{ /deezer/communication/scripts/ajax.js }]" type="text/javascript"></script>
+	<script src="[{ /deezer/demo/scripts/demo.js }]" type="text/javascript"></script>
+
+</head>
+<body id="body_deezer" class="demo_background">
+
+	<div class="demo_top">
+		<div class="demo_top_title"><img src="[{ /deezer/demo/images/logo.png }]" class="demo_top_logo" /><span>DEEZER test By Bruno Martin (Sept 14th, 2017)</span></div>
+		<div>Sujet 1 : Créer une mini API</div>
+		<div>
+			<div class="demo_top_specification">Développer en PHP une mini API REST avec output des données en JSON.</div>
+			<div class="demo_top_specification">
+				1. Mettre en place de quoi pouvoir récupérer les données :
+				<div class="demo_top_bullet">
+					<div>a. d'un utilisateur en fonction de son identifiant, les données étant son identifiant, son nom, son Email,</div>
+					<div>b. d’une chanson en fonction de son identifiant, les données étant son identifiant, son nom, sa durée.</div>
+				</div>
+			</div>
+			<div class="demo_top_specification">
+				2. Cette API doit aussi être capable de renvoyer les chansons favorites d'un utilisateur. Elle doit permettre de :
+				<div class="demo_top_bullet">
+					<div>a. récupérer cette liste,</div>
+					<div>b. ajouter une chanson dans cette liste,</div>
+					<div>c. enlever une chanson de cette liste.</div>
+				</div>
+			</div>
+			<div class="demo_top_specification">
+				En développant cette API, vous devez garder en tête qu'elle peut être susceptible d'évoluer (nouveaux types d’output, nouveaux attributs dans les objets, nouveaux objets...).<br />
+				Vous avez à votre disposition une base MySQL.<br />
+				Exercice à réaliser sans frameworks ou librairies (jQuery, Zend, Symfony, ...)
+			</div>
+		</div>
+	</div>
+
+	<span id="demo_clear" class="demo_display_none">{{ page_clear }}</span>
+
+	<div class="demo_action">
+		<div id="demo_action_1a" class="demo_action_button">
+			<span>1a </span>
+			<span>{{ user_info }}</span>
+		</div>
+		<div id="demo_response_1a" class="demo_response">
+			<div id="demo_response_1a_date" class="demo_clear_content"></div>
+			<div id="demo_response_1a_content" class="demo_clear_content"></div>
+		</div>
+	</div>
+
+	<div class="demo_action">
+		<div id="demo_action_1b" class="demo_action_button">
+			<span>1b </span>
+			<span>{{ song_info }}</span>
+		</div>
+		<div id="demo_response_1b" class="demo_response">
+			<div id="demo_response_1b_date" class="demo_clear_content"></div>
+			<div id="demo_response_1b_content" class="demo_clear_content"></div>
+		</div>
+	</div>
+	
+	<div class="demo_action">
+		<div id="demo_action_2a" class="demo_action_button">
+			<span>2a </span>
+			<span>{{ playlist_favorite_songs }}</span>
+		</div>
+		<div id="demo_response_2a" class="demo_response">
+			<div id="demo_response_2a_date" class="demo_clear_content"></div>
+			<div id="demo_response_2a_content" class="demo_clear_content"></div>
+		</div>
+	</div>
+	
+	<div class="demo_action">
+		<div id="demo_action_2b" class="demo_action_button">
+			<span>2b </span>
+			<span>{{ playlist_favorite_add }}</span>
+		</div>
+		<div id="demo_response_2b" class="demo_response">
+			<div id="demo_response_2b_date" class="demo_clear_content"></div>
+			<div id="demo_response_2b_content" class="demo_clear_content"></div>
+		</div>
+	</div>
+	
+	<div class="demo_action">
+		<div id="demo_action_2c" class="demo_action_button">
+			<span>2c </span>
+			<span>{{ playlist_favorite_remove }}</span>
+		</div>
+		<div id="demo_response_2c" class="demo_response">
+			<div id="demo_response_2c_date" class="demo_clear_content"></div>
+			<div id="demo_response_2c_content" class="demo_clear_content"></div>
+		</div>
+	</div>
+
+	<div class="demo_result">
+
+	</div>
+
+</body>
+</html>

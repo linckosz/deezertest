@@ -1,0 +1,50 @@
+#!/bin/bash
+
+RED='\e[91m'
+BRED='\e[41m'
+GREEN='\e[32m'
+NC='\e[0m' # No Color
+
+if [ -z $1 ]
+then
+	echo -e "${RED}Enter a user name${NC}"
+	exit 0
+fi
+
+if ! id -u $1 >/dev/null 2>&1
+then
+	echo -e "${RED}The user ${NC}${BRED}$1${NC}${RED} does not exist${NC}"
+	exit 0
+fi
+
+#cd ..
+
+# This commands helps to gather the proper link in GlusterFS configuration
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+root=${DIR}/..
+
+echo ${root}
+
+# Allow apache to read it only 
+chown -R $1:apache $root
+chmod -R 750 $root
+chmod -R g+s $root
+
+# Logs can be read/edit by apache
+chown -R $1:apache $root/logs
+chmod -R 770 $root/logs
+chmod -R g+s $root/logs
+
+# public/deezer doesn't need to be modified by the developer (if not a root user), but apache has to be able to write inside it
+if [ ! -d $root/public/deezer ]
+then
+	mkdir -p $root/public/deezer
+fi
+chown -R apache:apache $root/public/deezer
+chmod -R g+s $root/public/deezer
+
+# Delete execution permission to all files (.git will be excluded)
+chmod -R -x+X $root/*
+
+echo -e "${GREEN}Permission done${NC}"
+exit 0

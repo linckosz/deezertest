@@ -1,0 +1,126 @@
+/**
+ * @author Bruno Martin <brunoocto@gmail.com>
+ */
+
+html {
+	padding: 0;
+	margin: 0;
+	min-height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	color: #EFEFEF;
+	font-weight: 200;
+	backface-visibility: hidden;
+	font-size: 16px;
+	font-family: "San Francisco", Roboto, "Helvetica Neue", Helvetica, Tahoma, Verdana, "Nimbus Sans L", "URW Gothic L", "Lucida Grande", Geneva, "DejaVu Sans", "Microsoft Sans Serif", sans-serif;
+}
+
+#body_deezer {
+	margin: 10px;
+	background-color: #175277;
+	background-repeat: repeat;
+	background-position: top left;
+	overflow: hidden;
+}
+
+.demo_display_none {
+	display: none !important;
+}
+
+#demo_clear {
+	z-index: 3;
+	position: fixed;
+	display: inline-block;
+	color: rgba(255, 255, 255, 0.65);
+	border: 1px solid rgba(255, 255, 255, 0.65);
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 20px;
+	background-color: rgba(143, 143, 143, 0.6);
+	text-align: center;
+	padding: 6px 26px;
+	white-space: nowrap;
+	right: 30px;
+	bottom: 30px;
+	filter: alpha(opacity=80);
+	opacity: 0.80;
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+}
+#demo_clear:hover {
+	color: rgba(255, 255, 255, 0.80);
+	border: 1px solid rgba(255, 255, 255, 0.80);
+	background-color: rgba(143, 143, 143, 0.7);
+}
+#demo_clear:active {
+	color: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(255, 255, 255, 1);
+	background-color: rgba(143, 143, 143, 0.9);
+}
+
+.demo_top {
+	padding: 0 32px 32px 32px;
+}
+
+.demo_top_logo {
+	display: inline-block;
+	background: transparent;
+	height: 24px;
+	vertical-align: baseline;
+	margin-right: 12px;
+}
+
+.demo_top_title {
+	font-size: 24px;
+	margin: 20px 10px;
+	width: 100%;
+	text-align: center;
+}
+
+.demo_top_specification {
+	margin: 10px 32px;
+}
+
+.demo_top_bullet {
+	margin-left: 16px;
+}
+
+.demo_action {
+	padding: 10px 32px 50px 32px;
+	border-top: 2px solid rgba(141, 177, 191, 0.65);
+}
+
+.demo_action_button {
+	display: inline-block;
+	position: relative;
+	margin-bottom: 2px;
+	padding: 4px 20px;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.65);
+	border: 1px solid rgba(255, 255, 255, 0.65);
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+.demo_action_button:hover {
+	color: rgba(255, 255, 255, 0.80);
+	border: 1px solid rgba(255, 255, 255, 0.80);
+	background-color: rgba(255, 255, 255, 0.20);
+}
+
+.demo_action_button:active {
+	color: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(255, 255, 255, 1);
+	background-color: rgba(255, 255, 255, 0.30);
+}
+
+.demo_response {
+	padding: 6px 24px;
+}
+
+.demo_response_hidden {
+	visibility: hidden;
+}
