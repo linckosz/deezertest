@@ -25,6 +25,12 @@ root=${DIR}/..
 
 echo ${root}
 
+if [ ! -d $root/logs ]
+then
+	mkdir -p $root/logs
+fi
+chmod -R 770 $root/logs
+
 # Allow apache to read it only 
 chown -R $1:apache $root
 chmod -R 750 $root
