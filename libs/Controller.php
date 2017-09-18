@@ -40,9 +40,11 @@ abstract class Controller {
 				foreach ($matches as $match) {
 					$search = $match[1];
 					$file = $match[2];
+					$time = time();
 					if(is_file($deezer->getPath().'/public'.$file)){
-						$file .= '?'.filemtime($deezer->getPath().'/public'.$file);
+						$time = filemtime($deezer->getPath().'/public'.$file);
 					}
+					$file .= '?'.$time;
 					$msg = str_replace($search, $file, $msg);
 				}
 				

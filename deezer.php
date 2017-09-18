@@ -49,6 +49,13 @@ class Deezer {
 	protected static $param = null;
 
 	/**
+	 * API ID of the application used for the domain deezer.bru
+	 * @access protected
+	 * @static
+	 */
+	protected static $deezer_api_id = '252622';
+
+	/**
 	 * The APi key to secure all POST requests to the API
 	 */
 	const APIKEY = '38e30d84swe0ef799duy5cc4';
@@ -208,7 +215,10 @@ class Deezer {
 	 * @return mixed boolean / JSON string output
 	 */
 	public function launch(){
-		$uri = $_SERVER['REQUEST_URI'];
+		$uri = strstr($_SERVER['REQUEST_URI'], '?', true); //Exclude everything after '?'
+		if(!$uri){
+			$uri = $_SERVER['REQUEST_URI'];
+		}
 		$method = $_SERVER['REQUEST_METHOD'];
 		if(isset(self::$route[$method])){
 			if(isset(self::$route[$method][$uri]) && class_exists(self::$route[$method][$uri][0], true)){
@@ -258,6 +268,13 @@ class Deezer {
 			$text = STR::toJS($text);
 		}
 		return $text;
+	}
+
+	public function getApiID(){
+		if(isset($_SERVER['DEEZER_API_ID'])){
+			self::$deezer_api_id = $_SERVER['DEEZER_API_ID'];
+		}
+		return self::$deezer_api_id;
 	}
 
 }

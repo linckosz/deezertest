@@ -7,6 +7,6 @@ namespace bundles\demo\routes;
 
 $deezer = \Deezer::getInstance();
 
-//For demo
+//For Mini API demo page
 $deezer->setRouteGET('/', '\bundles\demo\controllers\ControllerDemo', 'demo');
 

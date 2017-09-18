@@ -8,7 +8,7 @@ namespace bundles\demo\controllers;
 use \libs\Controller;
 
 /**
- * Demo page Controller
+ * Mini API page Controller
  */
 class ControllerDemo extends Controller {
 

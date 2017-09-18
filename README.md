@@ -27,7 +27,7 @@ Installation
    - The file '/_INSTALLATION/nginx_back.conf' contains the nginx configuration needed for SUBJECT #1.
    - The file '/_INSTALLATION/nginx_front.conf' contains the nginx configuration needed for SUBJECT #2.
    - Make sure to adapt those files according to your server, especially pathes.
-   - Include the path to these 2 files to your nginx confguration file
+   - Include the path to these 2 files to your nginx confguration file.
 
 2. SSL
 They are self-certificated, and use wildcard subdomain *.deezer.bru .
@@ -36,8 +36,11 @@ NGIX should point to them:
    - '/_INSTALLATION/ssl.key'
 
 3. SQL
-   - Import the file '/_INSTALLATION/demo_deezer.sql', it will create the database and the user 'demo_deezer' used by the PHP application
-   - The hostname restriction for the user 'demo_deezer' is '192.168.1.%', modified it according to your connection setting. If any issue, just use the wildcard '%'
+   - Import the file '/_INSTALLATION/demo_deezer.sql', it will create the database and the user 'demo_deezer' used by the PHP application.
+   - The schema structure is available as a picture here: '/_INSTALLATION/demo_deezer_schema.png'.
+   - The hostname restriction for the user 'demo_deezer' is '192.168.1.%', modified it according to your connection setting. If any issue, just use the wildcard '%'.
+   - If the logic code (alias PHP) is well written, I prefer to not use foreign keys, they can drastically slow down the application.
+   - To keep track of Create/Update/Delete operation, I do not use Timestamp because a gap of a second is to big and can be annoying for users when sorting mixed models. Instead, I use an interger giving milliseconds of UNIX time.
 
 4. Database connecton
    - The file '/config/Database.php' contains connection information for the PHP application. If any issue with the user 'demo_deezer', just use the root user.
@@ -54,7 +57,7 @@ Need to go the the root directory of the application first.
 
 6. DNS
 Because the domain is not registered, make sure the host file on the host machine is pointing to the correct IP.<br />
-Use your own IP if you installed the server, or use 120.234.18.50 to connect to my server in Shenzhen (China)
+Use your own IP if you installed the server, or use 120.234.18.50 to connect to my server in Shenzhen (China).
 
 Windows => C:\Windows\System32\Hosts
 ```
@@ -69,20 +72,26 @@ Linux => /etc/hosts
 
 NOTE
 --------------
-All code, JS and PHP, are vanilla, without the help of any external library, and were created for this test purpose only.<br />
-A MVC structure structure has been designed to keep all the flexibility requested.<br />
-Please note that this structure is not ready yet for production.<br />
+The code is vanilla (PHP and JS), without the help of any external library.<br />
+A MVC structure structure has been designed to give the flexibility requested.<br />
+It should be pretty obvious, but I'd prefer to remind that this code structure is not production-ready, it's only for candidature purpose.<br />
 Since user authentication was not allowed, I just used a API key to secure the communication.<br />
 Here are some advantages of this configuration:
-   - Can add more models (create a file like '/bundles/api/models/data/toto.php')
-   - We can add new attributes (need to modify the table, the setItems method, and few parameters like the $model_visible attribute)
-   - We can create new output (need to add more in the file '/libs/Render.php')
-   - We code load only the bundles we need for a specific request (only if we want, this can help to have one singular code to maintain for frontend and backend, it can help to save time)
-   - Can insert variables inside HTML code
-   - Any JS file, CSS file, or picture modified will be automatically refreshed on client side, the application recognize the modification timestamp of each file, no need manual operation from the developer (for example, no need to hardly code '/images/toto.png?v=2')
-   - It accepts connection to multiple databases
-   - All Errors, JS and PHP, are stored in the directories '/logs/js' and '/logs/php'
-   - By using the method '/libs/Watch::php()', we can watch PHP variable, data are stored in the directory '/logs'
+   - Can add more models (create a file like '/bundles/api/models/data/toto.php').
+   - We can add new attributes (need to modify the table, the setItems method, and few parameters like the $model_visible attribute).
+   - We can create new output (need to add more in the file '/libs/Render.php').
+   - We code load only the bundles we need for a specific request (only if we want, this can help to have one singular code to maintain for frontend and backend, it can help to save time).
+   - Can insert variables inside HTML code.
+   - Any JS file, CSS file, or picture modified will be automatically refreshed on client side, the application recognize the modification timestamp of each file, no need manual operation from the developer (for example, no need to hardly code '/images/toto.png?v=2').
+   - It accepts connection to multiple databases.
+   - All Errors, JS and PHP, are stored in the directories '/logs/js' and '/logs/php'.
+   - By using the method '/libs/Watch::php()', we can watch PHP variable, data are stored in the directory '/logs'.
+   - Internationalization support, uncomment "$deezer->setLanguage('fr');" in '/front.php' and '/back.php' to use French.
+<br />
+<br />
+<br />
+<br />
+<br />
 <br />
 --------------
 
@@ -90,13 +99,18 @@ Sujet 1 : Créer une mini API
 ==============
 Développer en PHP une mini API REST avec output des données en JSON.
 
-Question 1
+Exercise 1
 --------------
 1. Mettre en place de quoi pouvoir récupérer les données :<br />
    a. d'un utilisateur en fonction de son identifiant, les données étant son identifiant, son nom, son Email,<br />
    b. d’une chanson en fonction de son identifiant, les données étant son identifiant, son nom, sa durée.
 
-1a
+Demo page
+--------------
+If you use 120.234.18.50 in your local DNS record, you can access to a demo page here:<br />
+https://api.deezer.bru/
+
+1-1a
 --------------
 ```
 Request URL: https://api.deezer.bru/data
@@ -104,21 +118,21 @@ Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
 {
-    "param":{    => Used store data we want to send to the API, the follofing pattern helps to regroup multiple CRUD operation on multiple models, it can help to save bandwidth and server CPU consumption by limiting the calls numbers
-        "read":{    => Used to specified CRUD request, it can be "read", "delete", or "set" (which includes to create+update)  
-            "user":{    => The model name, it can be "user", "song", or "playlist"
-                "1":{    => Any string we want, it's just a key (unused on API) to store multiple objects
-                    "id":1,    => The object ID
+    "param":{    => Used store data we want to send to the API, the follofing pattern helps to regroup multiple CRUD operation on multiple models, it can help to save bandwidth and server CPU consumption by limiting the calls numbers.
+        "read":{    => Used to specified CRUD request, it can be "read", "delete", or "set" (which includes to create+update)  .
+            "user":{    => The model name, it can be "user", "song", or "playlist".
+                "1":{    => Any string we want, it's just a key (unused on API) to store multiple objects.
+                    "id":1,    => The object ID.
                     "md5":"8f30ddb8d80ccd2b"    => The object MD5, it's used to secure CRUD operation ("delete & restore" need all the 32 characters, "create & update" need at least the 16 first characters, "read" needs at least the 8 first characters). The API will only give to the client the authorized length of the MD5. For instance, we can see that the user is only 16 characters because we don't allow deletion.
                 }
             }
         }
     },
-    "key":"38e30d84swe0ef799duy5cc4" => The API key to secure the communication
+    "key":"38e30d84swe0ef799duy5cc4" => The API key to secure the communication.
 }
 ```
 
-1b
+1-1b
 --------------
 ```
 Request URL: https://api.deezer.bru/data
@@ -140,14 +154,14 @@ Request Payload (JSON string):
 }
 ```
 
-Question 2
+Exercise 2
 --------------
 2. Cette API doit aussi être capable de renvoyer les chansons favorites d'un utilisateur. Elle doit permettre de :<br />
    a. récupérer cette liste,<br />
    b. ajouter une chanson dans cette liste,<br />
    c. enlever une chanson de cette liste.<br />
 
-2a
+1-2a
 --------------
 ```
 Request URL: https://bruno.api.deezer.bru/playlist/favoritesongs
@@ -157,7 +171,7 @@ Request Payload (JSON string):
 {
     "param":{
         "read":{
-            "user":{    => We use the user, because we want to grab its favorite playlist information
+            "user":{    => We use the user, because we want to grab its favorite playlist information.
                 "1":{
                     "id":1,
                     "md5":"8f30ddb8d80ccd2b"
@@ -169,7 +183,7 @@ Request Payload (JSON string):
 }
 ```
 
-2b
+1-2b
 --------------
 NOTE: We split into 2 commands here
 - 1st request => Add a song (which is actually the request)
@@ -185,11 +199,11 @@ Request Payload (JSON string):
                 "1":{
                     "id":1,
                     "md5":"54d40443deff03162a6ebb057c8380c8",
-                    "_attach":{    => We attach models together (it juts do nothing if not accepted by the API), it can be "_attach" or "_detach"
-                        "0":{    => Any string we want, it's just a key (unused on API) to store multiple objects
-                            "0":"song",    => The type of the model we want to attach/detach
-                            "1":5,    => The ID of the model we want to attach/detach
-                            "2":"e70ec532c5a4da739965216bfb733730"    => The MD5 of the model we want to attach/detach
+                    "_attach":{    => We attach models together (it juts do nothing if not accepted by the API), it can be "_attach" or "_detach".
+                        "0":{    => Any string we want, it's just a key (unused on API) to store multiple objects.
+                            "0":"song",    => The type of the model we want to attach/detach.
+                            "1":5,    => The ID of the model we want to attach/detach.
+                            "2":"e70ec532c5a4da739965216bfb733730"    => The MD5 of the model we want to attach/detach.
                         }
                     }
                 }
@@ -220,7 +234,7 @@ Request Payload (JSON string):
 }
 ```
 
-2c
+1-2c
 --------------
 NOTE: We split into 2 commands here
 - 1st request => Add a song (which is actually the request)
@@ -236,7 +250,7 @@ Request Payload (JSON string):
                 "1":{
                     "id":1,
                     "md5":"54d40443deff03162a6ebb057c8380c8",
-                    "_detach":{    => We detach models
+                    "_detach":{    => We detach models.
                         "0":{
                             "0":"song",
                             "1":5,
@@ -272,3 +286,28 @@ Request Payload (JSON string):
 ```
 <br />
 <br />
+<br />
+<br />
+<br />
+<br />
+--------------
+
+Sujet 2 : Playlist mise à jour à la volée ( sujet optionnel)
+==============
+
+Exercise 1
+--------------
+En utilisant notre SDK JS disponible sur http://developers.deezer.com/sdk/javascript, mettre en place une playlist se rafraîchissant à chaque ajout de chansons à celle-ci.<br />
+L'idée est qu'à partir d'une playlist vous appartenant et en cours de lecture grâce au SDK JS, si vous ajoutez des chansons à la volée par l’intermédiaire de l’API, celle-ci apparaisse dans cette playlist et puisse être jouée.
+
+Demo page
+--------------
+If you use 120.234.18.50 in your local DNS record, you can access to a demo page here:<br />
+https://deezer.bru/
+
+Note
+-------------
+The SDK is not accessible from China, Deezer servers are blocked. This is why I had to store a copy of it into my application. '/public/scripts/dz.js'
+
+2-1
+--------------

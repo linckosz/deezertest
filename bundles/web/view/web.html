@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+	<title>Deezer - SDK JS</title>
+	<link rel="shortcut icon" href="[{ /favicon.ico }]" />
+	<link rel="icon" href="[{ /favicon.png }]" type="image/png" />
+	<link rel="apple-touch-icon" href="[{ /favicon.png }]" type="image/png" />
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-barstyle" content="default">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="date=no">
+	<meta name="format-detection" content="address=no">
+	<meta name="description" content="Deezer SDK JS" />
+	<meta name="Keywords" content="deezer" />
+
+	<link rel="stylesheet" href="[{ /deezer/web/styles/web.css }]" type="text/css" />
+	<link rel="stylesheet" href="[{ /deezer/web/styles/responsive.css }]" type="text/css" />
+	<style type="text/css">
+		#body_deezer {
+			background-image: url("[{ /deezer/web/images/background.png }]"), linear-gradient(140deg, #023762, #00719C) !important;
+		}
+		#web_page_player_cd_control {
+			background-image: url("[{ /deezer/web/images/background.png }]") !important;
+		}
+	</style>
+
+	<script type="text/javascript">
+		//Grab the correct API ID
+		var web_app_id = parseInt({{ deezer_api_id }}, 10);
+
+		//Preload some icons
+		var web_page_player_cd_control_error = new Image();
+		web_page_player_cd_control_error.src = "[{ /deezer/web/images/control_error.png }]";
+		var web_page_player_cd_control_pause = new Image();
+		web_page_player_cd_control_pause.src = "[{ /deezer/web/images/control_pause.png }]";
+		var web_page_player_cd_control_play = new Image();
+		web_page_player_cd_control_play.src = "[{ /deezer/web/images/control_play.png }]";
+	</script>
+
+	<script src="[{ /scripts/dz.js }]" type="text/javascript"></script>
+
+	<script src="[{ /deezer/communication/scripts/divers.js }]" type="text/javascript"></script>
+	<script src="[{ /deezer/communication/scripts/ajax.js }]" type="text/javascript"></script>
+	
+	<script src="[{ /deezer/web/scripts/web.js }]" type="text/javascript"></script>
+	<script src="[{ /deezer/web/scripts/responsive.js }]" type="text/javascript"></script>
+
+	<!-- This link import dynamic translation -->
+	<script src="[{ /translation/web.js }]" type="text/javascript"></script>
+
+</head>
+<body id="body_deezer" class="web_background">
+
+	<div id="web_top">
+		<div class="web_top_title"><img src="[{ /deezer/web/images/logo.png }]" class="web_top_logo" /><span>DEEZER test By Bruno Martin (Sept 14th, 2017)</span></div>
+		<div>Sujet 2 : Playlist mise à jour à la volée (sujet optionnel)</div>
+		<div>
+			<div class="web_top_specification">
+				En utilisant notre SDK JS disponible sur http://developers.deezer.com/sdk/javascript, mettre en place une playlist se rafraîchissant à chaque ajout de chansons à celle-ci.
+			</div>
+			<div class="web_top_specification">
+				L'idée est qu'à partir d'une playlist vous appartenant et en cours de lecture grâce au SDK JS, si vous ajoutez des chansons à la volée par l’intermédiaire de l’API, celle-ci apparaisse dans cette playlist et puisse être jouée.
+			</div>
+		</div>
+		
+		<span id="web_app_login_button">{{ open_player }}</span>
+
+	</div>
+
+	<div id="dz-root" class="web_dz_root web_display_none"></div>
+
+	<div id="web_page" class="web_display_none">
+		<div id="web_page_player"></div>
+		<div id="web_page_player_cd">
+			<div id="web_page_player_cd_control">
+				<img id="web_page_player_cd_control_img" src="" />
+			</div>
+		</div>
+		<div id="web_page_player_song">
+			<div id="web_page_player_song_top"><span id="web_page_player_song_top_title">A yellow sub marine</span><span id="web_page_player_song_top_duration">2:00</span></div>
+			<div id="web_page_player_song_by">Beattles</div>
+			<div id="web_page_player_song_track"><div id="web_page_player_song_track_ball"></div></div>
+		</div>
+		<div id="web_page_playlist"></div>
+	</div>
+
+	<div class="web_display_none">
+
+		<div id="-web_playlist_line">
+
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -61,6 +61,25 @@ var parseHTML = function(text) {
 };
 
 /**
+ * Help to display HTML text for a JS variable, and convert line breaks
+ * @param {string} text - Any text
+ * @return {string}
+ */
+var JStoHTML = function(text){
+	//text = php_htmlentities(text, true); //Need to enable double encoding
+	if(typeof text == 'undefined'){
+		text = '';
+	}
+	text = parseHTML(text);
+	text = lnTobr(text);
+	return text;
+};
+
+var lnTobr = function(str) {
+	return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+}
+
+/**
  * Replace all instance found in a string
  * @param {string} find - The search string
  * @param {string} replace - The replacement string 

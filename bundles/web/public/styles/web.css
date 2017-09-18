@@ -1,0 +1,291 @@
+/**
+ * @author Bruno Martin <brunoocto@gmail.com>
+ */
+
+html {
+	padding: 0;
+	margin: 0;
+	min-height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	color: #EFEFEF;
+	font-weight: 200;
+	backface-visibility: hidden;
+	font-size: 16px;
+	font-family: "San Francisco", Roboto, "Helvetica Neue", Helvetica, Tahoma, Verdana, "Nimbus Sans L", "URW Gothic L", "Lucida Grande", Geneva, "DejaVu Sans", "Microsoft Sans Serif", sans-serif;
+}
+
+#body_deezer {
+	margin: 10px;
+	background-color: #175277;
+	background-repeat: repeat;
+	background-position: top left;
+	overflow: hidden;
+}
+
+.web_display_none {
+	display: none !important;
+}
+
+.web_perfect_center {
+	position: absolute;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+}
+
+#web_clear {
+	z-index: 3;
+	position: fixed;
+	display: inline-block;
+	color: rgba(255, 255, 255, 0.65);
+	border: 1px solid rgba(255, 255, 255, 0.65);
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 20px;
+	background-color: rgba(143, 143, 143, 0.6);
+	text-align: center;
+	padding: 6px 26px;
+	white-space: nowrap;
+	right: 30px;
+	bottom: 30px;
+	filter: alpha(opacity=80);
+	opacity: 0.80;
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+}
+#web_clear:hover {
+	color: rgba(255, 255, 255, 0.80);
+	border: 1px solid rgba(255, 255, 255, 0.80);
+	background-color: rgba(143, 143, 143, 0.7);
+}
+#web_clear:active {
+	color: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(255, 255, 255, 1);
+	background-color: rgba(143, 143, 143, 0.9);
+}
+
+#web_top {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	padding: 10px;
+	margin: 0;
+	overflow: hidden;
+}
+
+.web_top_logo {
+	display: inline-block;
+	background: transparent;
+	height: 24px;
+	vertical-align: baseline;
+	margin-right: 12px;
+}
+
+.web_top_title {
+	font-size: 24px;
+	margin: 20px 10px;
+	width: 100%;
+	text-align: center;
+}
+
+.web_top_specification {
+	margin: 10px 32px;
+}
+
+.web_top_bullet {
+	margin-left: 16px;
+}
+
+.web_dz_root {
+	
+}
+
+#web_app_login_button {
+	display: inline-block;
+	position: absolute;
+	margin: auto;
+	margin-top: 50px;
+	width: 50%;
+	left: 0;
+	right: 0;
+	padding: 6px 30px;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.65);
+	border: 1px solid rgba(255, 255, 255, 0.65);
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+#web_app_login_button:hover {
+	color: rgba(255, 255, 255, 0.80);
+	border: 1px solid rgba(255, 255, 255, 0.80);
+	background-color: rgba(255, 255, 255, 0.20);
+}
+
+#web_app_login_button:active {
+	color: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(255, 255, 255, 1);
+	background-color: rgba(255, 255, 255, 0.30);
+}
+
+
+
+#web_page_player_cd_control {
+	background-color: #15466B;
+	background-repeat: repeat;
+	background-position: center;
+	height: 40px;
+	width: 40px;
+	border: 6px solid rgba(220, 220, 220, 0.45);
+	border-radius: 100%;
+	overflow: visible;
+}
+
+#web_page_player_cd_control_img {
+	position: absolute;
+	margin: 8px;
+	height: 24px;
+	width: 24px;
+	cursor: pointer;
+	filter: alpha(opacity=80);
+	opacity: 0.80;
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+}
+#web_page_player_cd_control_img:hover {
+	filter: alpha(opacity=90);
+	opacity: 0.90;
+	-moz-opacity: 0.90;
+	-khtml-opacity: 0.90;
+}
+#web_page_player_cd_control_img:active {
+	filter: alpha(opacity=100);
+	opacity: 1.00;
+	-moz-opacity: 1.00;
+	-khtml-opacity: 1.00;
+}
+
+
+#web_page {
+	position: relative;
+	height: 160px;
+	width: 100%;
+}
+
+#web_page_player {
+	position: absolute;
+	z-index: 2;
+	margin: 10px;
+	height: 138px;
+	width: 138px;
+	border-radius: 100%;
+	background-color: #DCDCDC;
+	border: 1px solid rgba(220, 220, 220, 0.45);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+
+#web_page_player_cd {
+	position: absolute;
+	z-index: 3;
+	top: 54px;
+	left: 54px;
+}
+
+#web_page_player_song {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	border-left: 180px solid transparent;
+	box-sizing: border-box;
+}
+
+#web_page_player_song_top {
+	margin-top: 30px;
+	position: relative;
+	width: 96%;
+	font-size: 22px;
+}
+
+#web_page_player_song_top_duration {
+	float: right;
+}
+
+#web_page_player_song_by {
+	margin-top: 10px;
+	position: relative;
+	width: 96%;
+	font-size: 18px;
+	filter: alpha(opacity=80);
+	opacity: 0.80;
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+}
+
+#web_page_player_song_track {
+	position: absolute;
+	left: 2%;
+	bottom: 30px;
+	width: 92%;
+	height: 2px;
+	background-color: rgba(141, 177, 191, 0.20);
+	box-shadow: 0 0 12px 1px rgba(141, 177, 191, 0.80);
+}
+
+#web_page_player_song_track_ball {
+	position: absolute;
+	margin-top: -7px;
+	margin-left: -7px;
+	width: 16px;
+	height: 16px;
+	cursor: W-resize;
+	border-radius: 100%;
+	background-color: #DCDCDC;
+}
+
+/**
+ * Tablet in Landscape and more
+ */
+@media only screen and (min-width: 901px){
+	#web_page {
+		max-width: 900px;
+		margin-left: auto;
+		margin-right: auto;
+		height: 240px;
+	}
+	#web_page_player_cd_control {
+		height: 52px;
+		width: 52px;
+		border-width: 8px;
+	}
+	#web_page_player_cd_control_img {
+		margin: 10px;
+		height: 32px;
+		width: 32px;
+	}
+	#web_page_player {
+		height: 218px;
+		width: 218px;
+	}
+	#web_page_player_cd {
+		top: 86px;
+		left: 86px;
+	}
+	#web_page_player_song {
+		border-left-width: 260px;
+	}
+}
