@@ -19,6 +19,7 @@ var demo_clear = function(show){
 			elem.classList.add('demo_display_none');
 			var list = document.getElementsByClassName('demo_clear_content');
 			for(var i in list){
+				if(isNaN(parseInt(i, 10))){ continue; }
 				list[i].innerHTML = '';
 			}
 		}

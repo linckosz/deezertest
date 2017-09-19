@@ -18,9 +18,15 @@ class ControllerWeb extends Controller {
 	 */
 	public function web(){
 		$deezer = \Deezer::getInstance();
+		$get = \Deezer::getParam();
+		$deezer_code = '';
+		if(isset($get->code)){
+			$deezer_code = $get->code;
+		}
 		$data = array(
 			'deezer_api_id' => $deezer->getApiID(),
 			'open_player' => $deezer->getTranslation(2000), //Open Player
+			'deezer_code' => $deezer_code,
 		);
 		$this->view('/bundles/web/view/web.html', $data);
 	}
@@ -37,7 +43,7 @@ class ControllerWeb extends Controller {
 		header('Expires: '.gmdate('D, d M Y H:i:s', time()+$cache_expire).' GMT');
 		header('Content-type: text/html; charset=UTF-8');
 
-		$this->view('/bundles/web/view/channel.html', $data);
+		$this->view('/bundles/web/view/channel.html');
 	}
 
 	/**

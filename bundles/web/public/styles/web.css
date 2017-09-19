@@ -8,7 +8,7 @@ html {
 	min-height: 100%;
 	width: 100%;
 	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-y: hidden;
 	color: #EFEFEF;
 	font-weight: 200;
 	backface-visibility: hidden;
@@ -22,23 +22,7 @@ html {
 	background-repeat: repeat;
 	background-position: top left;
 	overflow: hidden;
-}
-
-.web_display_none {
-	display: none !important;
-}
-
-.web_perfect_center {
-	position: absolute;
-	text-align: center;
-	vertical-align: middle;
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-	top: 50%;
-	left: 50%;
+	cursor: default;
 }
 
 #web_clear {
@@ -181,7 +165,6 @@ html {
 
 #web_page {
 	position: relative;
-	height: 160px;
 	width: 100%;
 }
 
@@ -208,10 +191,11 @@ html {
 
 #web_page_player_song {
 	position: absolute;
-	height: 100%;
+	height: 160px;
 	width: 100%;
 	border-left: 180px solid transparent;
 	box-sizing: border-box;
+	border-bottom: 2px solid rgba(141, 177, 191, 0.20);
 }
 
 #web_page_player_song_top {
@@ -246,6 +230,15 @@ html {
 	box-shadow: 0 0 12px 1px rgba(141, 177, 191, 0.80);
 }
 
+#web_page_player_song_track_cover {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0%;
+	height: 2px;
+	background-color: rgba(141, 177, 191, 0.25);
+}
+
 #web_page_player_song_track_ball {
 	position: absolute;
 	margin-top: -7px;
@@ -255,6 +248,63 @@ html {
 	cursor: W-resize;
 	border-radius: 100%;
 	background-color: #DCDCDC;
+	z-index: 2;
+}
+
+#web_page_playlist {
+	width: 100%;
+	border-top: 164px solid transparent;
+	box-sizing: border-box;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.web_playlist_line {
+	cursor: pointer;
+	width: 70%;
+	padding: 6px;
+	margin-left: 15%;
+	min-height: 52px;
+	margin-bottom: 6px;
+	background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgba(2, 55, 98, 0.02));
+}
+.web_playlist_line:hover {
+	background-image: none;
+	background-color: rgba(255, 255, 255, 0.05);
+}
+.web_playlist_line:active {
+	background-image: none;
+	background-color: rgba(255, 255, 255, 0.10);
+}
+
+.web_playlist_line_picture {
+	float: left;
+	width: 52px;
+	height: 52px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.web_playlist_line_content {
+
+}
+
+.web_playlist_line_content_top {
+
+}
+
+.web_playlist_line_content_top_title {
+
+}
+
+.web_playlist_line_content_top_duration {
+	float: right;
+}
+
+.web_playlist_line_content_by {
+
 }
 
 /**
@@ -265,7 +315,6 @@ html {
 		max-width: 900px;
 		margin-left: auto;
 		margin-right: auto;
-		height: 240px;
 	}
 	#web_page_player_cd_control {
 		height: 52px;
@@ -287,5 +336,9 @@ html {
 	}
 	#web_page_player_song {
 		border-left-width: 260px;
+		height: 240px;
+	}
+	#web_page_playlist {
+		border-top-width: 244px;
 	}
 }

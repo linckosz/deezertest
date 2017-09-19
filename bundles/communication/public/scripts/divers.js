@@ -22,13 +22,19 @@ var ArrayToObject = function(arr){
 };
 
 /**
+ * Keep track of events attached
+ */
+var attachedEvent = {};
+
+/**
  * Polyfill for event listener
  * @param {string} type - The event name (like 'click')
  * @param {string|object} id - The ID of a DOM element, or the DOM elemnet itself
  * @param {function} fn - The function to launch when the event is fired
- * @return {void}
+ * @return {number} - Total of event attached to the element
  */
 var attachAction = function(type, id, fn){
+	var index = 0;
 	var elem = false;
 	if(typeof id == 'string'){
 		var elem = document.getElementById(id);
@@ -36,10 +42,43 @@ var attachAction = function(type, id, fn){
 		var elem = id;
 	}
 	if(elem && typeof fn == 'function'){
+		if(typeof attachedEvent[id] != 'object'){
+			attachedEvent[id] = {};
+		}
+		if(typeof attachedEvent[id][type] != 'object'){
+			attachedEvent[id][type] = [];
+		}
+		attachedEvent[id][type].push(fn);
+		index = attachedEvent[id][type].length-1;
 		if(typeof window.addEventListener == 'function'){
-			elem.addEventListener(type, fn, false);
+			elem.addEventListener(type, attachedEvent[id][type][index], false);
 		} else if(typeof window.attachEvent){
-			elem.attachEvent('on'+type, fn);
+			elem.attachEvent('on'+type, attachedEvent[id][type][index]);
+		}
+	}
+	return index;
+};
+
+/**
+ * Polyfill for event remover
+ * @param {string} type - The event name (like 'click')
+ * @param {string|object} id - The ID of a DOM element, or the DOM elemnet itself
+ * @return {void}
+ */
+var detachAllActions = function(type, id){
+	var elem = false;
+	if(typeof id == 'string'){
+		var elem = document.getElementById(id);
+	} else if(typeof id == 'object'){
+		var elem = id;
+	}
+	if(elem && typeof attachedEvent[id] == 'object' && typeof attachedEvent[id][type] == 'object'){
+		for(var index in attachedEvent[id][type]){
+			if(typeof window.removeEventListener == 'function'){
+				elem.removeEventListener(type, attachedEvent[id][type][index]);
+			} else if(typeof window.detachEvent){
+				elem.detachEvent('on'+type, attachedEvent[id][type][index]);
+			}
 		}
 	}
 };
@@ -75,9 +114,13 @@ var JStoHTML = function(text){
 	return text;
 };
 
+/**
+ * Convert line break into DOM element BR
+ * @param {string} text - Any text
+ */
 var lnTobr = function(str) {
 	return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
-}
+};
 
 /**
  * Replace all instance found in a string
@@ -103,4 +146,4 @@ var convertDuration = function(duration){
 		seconds = '0'+seconds;
 	}
 	return minutes+':'+seconds;
-}
+};
