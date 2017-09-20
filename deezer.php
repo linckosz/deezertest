@@ -188,6 +188,8 @@ class Deezer {
 	 * @return void
 	 */
 	public function loadBundles(array $bundles){
+		//Make sure that the deezer public directory exists (it should have been previously created by a LINUX command)
+		(new Folders)->createPath($this->getPath().'/public/deezer/');
 		foreach ($bundles as $bundle) {
 			//Only accept routes from preloaded bundles
 			$folder = new Folders($this->getPath().'/bundles/'.$bundle.'/routes');
