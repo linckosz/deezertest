@@ -5,7 +5,7 @@
  var web_app_timer;
 
 //Delete URI
-//window.history.replaceState(null, null, document.location.pathname);
+window.history.replaceState(null, null, document.location.pathname);
 
 /**
  * Load some actions after the DOM is loaded
@@ -28,6 +28,8 @@ attachAction('load', window, function(){
 			if(!web_deezer_authorized){
 				web_app_login();
 			} else {
+				DZ.token = web_deezer_authorized;
+				DZ.tokenExpire = 0;
 				alert(web_deezer_authorized);
 			}
 		}
@@ -100,7 +102,7 @@ var web_app_login = function(){
 	 * Click event for the button 'web_app_login_button'
 	 */
 	attachAction('click', 'web_app_login_button', function(){
-		window.location.href = 'https://connect.deezer.com/oauth/auth.php?app_id='+web_app_id+'&redirect_uri='+top.location.protocol+'//'+document.domain+'&perms=basic_access,email,manage_library';
+		window.location.href = 'https://connect.deezer.com/oauth/auth.php?app_id='+web_app_id+'&redirect_uri='+top.location.protocol+'//'+document.domain+'&perms=basic_access,email,manage_library,offline_access';
 	});
 
 }

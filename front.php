@@ -4,6 +4,7 @@
  */
 
 error_reporting(0); //Disable error message to avoid it to be sent to the client side
+session_start();
 $path = dirname(__FILE__);
 require_once $path.'/config/Autoload.php';
 require_once $path.'/config/Database.php';

@@ -124,3 +124,17 @@ html {
 .demo_response_hidden {
 	visibility: hidden;
 }
+
+.demo_loading {
+	position: absolute;
+	height: 2px;
+	width: 96%;
+	left: 2%;
+	bottom: -6px;
+	background: none;
+	border: none;
+	filter: alpha(opacity=80);
+	opacity: 0.80;
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+}
