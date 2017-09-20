@@ -26,6 +26,7 @@ class STR {
 	 * Convert a text to JS entities, readable by JS
 	 * Note, use quotes "..." around the JS variable while displaying
 	 * @static
+	 * @param string $text Any text
 	 * @return string
 	 */
 	public static function toJS($text) {
@@ -39,6 +40,7 @@ class STR {
 	/**
 	 * Convert "any_SHORT description " to "AnyShortDescription"
 	 * @static
+	 * @param string $text Any text
 	 * @return string
 	 */
 	public static function textToFirstUC($text){
@@ -51,6 +53,8 @@ class STR {
 	/**
 	 * Delete any line return
 	 * @static
+	 * @param string $text Any text
+	 * @param string $replace The replaced string
 	 * @return string
 	 */
 	public static function breakLineConverter($text, $replace) {
@@ -60,6 +64,7 @@ class STR {
 	/**
 	 * 191 is limited by MySQL for UTF8 Indexing
 	 * @static
+	 * @param string $text Any text
 	 * @return boolean
 	 */
 	public static function validEmail($text){
@@ -69,6 +74,7 @@ class STR {
 	/**
 	 * Get an hazard alphanumeric mix of lengh X
 	 * @static
+	 * @param integer $lengh The length of the string we want to receive
 	 * @return string
 	 */
 	public static function random($lengh=16) {

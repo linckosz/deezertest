@@ -25,10 +25,10 @@ attachAction('load', window, function(){
 	web_app_timer = setInterval(function(){
 		if(DZ.initialized){
 			clearInterval(web_app_timer);
-			if(!web_deezer_code){
+			if(!web_deezer_authorized){
 				web_app_login();
 			} else {
-				alert(web_deezer_code);
+				alert(web_deezer_authorized);
 			}
 		}
 	}, 200);
@@ -100,7 +100,7 @@ var web_app_login = function(){
 	 * Click event for the button 'web_app_login_button'
 	 */
 	attachAction('click', 'web_app_login_button', function(){
-		window.location.href = 'https://connect.deezer.com/oauth/auth.php?app_id=252642&redirect_uri=https://bruno.deezer.bru&perms=basic_access,email,manage_library';
+		window.location.href = 'https://connect.deezer.com/oauth/auth.php?app_id='+web_app_id+'&redirect_uri='+top.location.protocol+'//'+document.domain+'&perms=basic_access,email,manage_library';
 	});
 
 }

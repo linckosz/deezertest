@@ -5,7 +5,7 @@
 
 namespace libs;
 
-use \libs\Folders;
+use \libs\Folder;
 
 /**
  * it helps to watch variables
@@ -23,6 +23,13 @@ class Watch {
 	 * Function to watch variables
 	 * @example \libs\Watch::php(true, '$var', __FILE__, __LINE__, false, false, true);
 	 * @static
+	 * @param mixed $var Any data we want to watch
+	 * @param string $comment Title
+	 * @param string $filename The filename where we watch
+	 * @param string $fileline The line number where we watch
+	 * @param boolean $error We specify if it's an error
+	 * @param boolean $reset We clean the file at the first call only, other calls will be concatenated
+	 * @param boolean $cleaner We force to clean the file regarless any previous record on current process
 	 * @return void
 	 */
 	public static function php($var='yes', $comment='undefined', $filename=__FILE__, $fileline=__LINE__, $error=false, $reset=false, $cleaner=false){
@@ -41,7 +48,7 @@ class Watch {
 			$fic = $logPath.'/watchPHP_'.date('ymd').'.txt';
 		}
 
-		$folder = new Folders;
+		$folder = new Folder;
 		$folder->createPath($logPath, 0770);
 
 		if(file_exists($fic)){
@@ -152,7 +159,7 @@ $msg
 $err = str_replace("\n","
 ",$err);
 
-		$folder = new Folders;
+		$folder = new Folder;
 		$folder->createPath($logPath, 0770);
 
 		$fic = $logPath.'/logJS_'.date('ymd').'.txt';

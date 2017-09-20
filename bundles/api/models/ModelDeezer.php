@@ -84,13 +84,14 @@ abstract class ModelDeezer {
 	/**
 	 * Return the Class name
 	 * @static
+	 * @param string $table The table name of the Class
 	 * @return string|boolean
 	 */
-	public static function getClass($class=false){
-		if(!$class){
-			$class = static::getTable();
+	public static function getClass($table=false){
+		if(!$table){
+			$table = static::getTable();
 		}
-		$fullClass = '\\bundles\\api\\models\\data\\'.STR::textToFirstUC($class);
+		$fullClass = '\\bundles\\api\\models\\data\\'.STR::textToFirstUC($table);
 		if(class_exists($fullClass)){
 			return $fullClass;
 		}
@@ -100,6 +101,10 @@ abstract class ModelDeezer {
 	/**
 	 * Return MySQL response, or hydrate models
 	 * @static
+	 * @param string $sql The raw SQL request
+	 * @param array $bind An array of the variables to inject
+	 * @param boolean $single True: We get only the instance / False: We get an array of instances
+	 * @param boolean $hydrate True: We hydrate the instance / False: We don't hydrate
 	 * @return array|object It can be a array of array(SQL direct response), an array of multiple model instances, an model instance
 	 */
 	public static function hydrate(string $sql, array $bind, bool $single=false, $hydrate=true){
@@ -147,6 +152,10 @@ abstract class ModelDeezer {
 
 	/**
 	 * Save relation between 2 model instances
+	 * @param string $table The table name of the Class
+	 * @param array $bind An array of the variables to inject
+	 * @param string $where Some "where" SQL conditions
+	 * @param boolean $insert True: Insert a row / False: Update a row
 	 * @return boolean
 	 */
 	public function saveRelation($table, $bind=array(), $where=array(), $insert=false){
@@ -201,6 +210,7 @@ abstract class ModelDeezer {
 
 	/**
 	 * Scanne all attributes '_attach/_detach' of a form to determine relation will be saved
+	 * @param object $attributes List of item attributes
 	 * @return void
 	 */
 	public function setRelation($attributes){
@@ -233,6 +243,7 @@ abstract class ModelDeezer {
 	/**
 	 * Return a instance by its ID
 	 * @static
+	 * @param integer $id Model ID
 	 * @return static
 	 */
 	public static function find(int $id){
@@ -246,6 +257,8 @@ abstract class ModelDeezer {
 	/**
 	 * Return a instance by its ID and its MD5 (CRUD check)
 	 * @static
+	 * @param integer $id Model ID
+	 * @param string $id Model MD5
 	 * @return boolean|static
 	 */
 	public static function findMD5(int $id, $md5){
@@ -320,6 +333,7 @@ abstract class ModelDeezer {
 
 	/**
 	 * Insert/Udate a model instance into the database
+	 * @param array $bind An array of the variables to inject
 	 * @return $this
 	 */
 	public function save($bind=array()){

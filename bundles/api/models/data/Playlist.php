@@ -78,6 +78,9 @@ class Playlist extends ModelDeezer {
 
 	/**
 	 * Insert/Update pivot table
+	 * @param integer $song_id The song ID
+	 * @param string $song_md5 The song MD5
+	 * @param array $pivot_attributes An array of all extra field fo the pivot (like attached)
 	 * @return boolean
 	 */
 	public function pivot_song($song_id, $song_md5, $pivot_attributes){
@@ -118,6 +121,9 @@ class Playlist extends ModelDeezer {
 
 	/**
 	 * Update "belongs to" relationship
+	 * @param integer $user_id The use ID
+	 * @param string $user_md5 The user MD5
+	 * @param array $pivot_attributes An array of all extra field fo the pivot (like attached)
 	 * @return boolean
 	 */
 	public function pivot_user($user_id, $suser_md5, $pivot_attributes){
@@ -145,6 +151,7 @@ class Playlist extends ModelDeezer {
 	/**
 	 * Prepare the modle instance with the data sent via POST
 	 * @static
+	 * @param object $form The information received via POST
 	 * @return mixed Playlist / JSON string output
 	 */
 	public static function setItem($form){

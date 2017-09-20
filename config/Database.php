@@ -30,6 +30,7 @@ class Database {
 	/**
 	 * Return connection information
 	 * @static
+	 * @param string $database Name of the Database
 	 * @return self|boolean
 	 */
 	public static function getConnection($database){

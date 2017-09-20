@@ -15,6 +15,8 @@ abstract class Controller {
 
 	/**
 	 * Fallback if no route matches
+	 * @param string $method Method of a Class we tried to access
+	 * @param array $args Some parameters
 	 * @return mixed JSON string output
 	 */
 	public function __call($method, $args=array()){
@@ -24,6 +26,8 @@ abstract class Controller {
 
 	/**
 	 * Process the content of a page with variables before to output it
+	 * @param string $view The raw format of the page we want to display
+	 * @param array $args Some parameters
 	 * @return mixed HTML string output
 	 */
 	public function view($view, $data=array()){

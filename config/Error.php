@@ -5,11 +5,17 @@
 
 namespace config;
 
-use \libs\Folders;
+use \libs\Folder;
 use \libs\Render;
 
 /**
  * Grab any PHP error and store it into a file for debugging purpose
+ * @param integer $errno Error code
+ * @param string $errmsg Error message
+ * @param string $filename Filename where the error happened
+ * @param string $linenum Line where the error happened
+ * @param string $vars Error details (traceability)
+ * @param string $type Error type
  * @return void
  */
 function userErrorHandler($errno, $errmsg, $filename, $linenum, $vars, $type='UNK'){
@@ -89,7 +95,7 @@ function userErrorHandler($errno, $errmsg, $filename, $linenum, $vars, $type='UN
 $err = str_replace("\n","
 ",$err);
 
-		$folder = new Folders;
+		$folder = new Folder;
 		$folder->createPath($logPath, 0770);
 
 		$fic = $logPath.'/logPHP_'.date('ymd').'.txt';
@@ -129,6 +135,7 @@ function shutdownHandler(){
 
 /**
  * Overwrite the exceptionHandler callback
+ * @param Exception $exception Exception catched
  * @return void
  */
 function exceptionHandler(\Throwable $exception) {
@@ -150,6 +157,8 @@ function sendMsg(){
  * Get the traceability at the request moment
  * http://php.net/manual/fr/function.debug-backtrace.php
  * @example $trace = \config\getTraceAsString(new \Exception, 30);
+ * @param Exception $e Exception catched
+ * @param integer $count Number of trcaeable rows we want to display
  * @return string
  */
 function getTraceAsString($e, $count=0){

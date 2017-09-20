@@ -8,7 +8,7 @@ namespace libs;
 /**
  * 
  */
-class Folders {
+class Folder {
 
 	/**
 	 * The absolute Path
@@ -18,9 +18,10 @@ class Folders {
 
 	/**
 	 * Constructor
+	 * @param boolean|string $folder Absolute path
 	 * @return void
 	 */
-	public function __construct($folder = false){
+	public function __construct($folder=false){
 		$this->setPath($folder);
 	}
 
@@ -35,6 +36,7 @@ class Folders {
 	/**
 	 * Check if the directory exists
 	 * @access protected
+	 * @param string $folder Absolute path
 	 * @return boolean
 	 */
 	protected function checkPath($folder){
@@ -46,6 +48,7 @@ class Folders {
 
 	/**
 	 * Set the Path
+	 * @param string $folder Absolute path
 	 * @return boolean
 	 */
 	public function setPath($folder){
@@ -59,9 +62,10 @@ class Folders {
 
 	/**
 	 * Set teh CHMOD of the directory
+	 * @param integer $chmod Linux permission
 	 * @return boolean
 	 */
-	public function setCHMOD($chmod = 0750){
+	public function setCHMOD($chmod=0750){
 		if($this->folder !== false){
 			if($this->checkPath($this->folder)){
 				return chmod($this->folder, $chmod);
@@ -73,6 +77,7 @@ class Folders {
 	/**
 	 * Includes into PHP code all '*.php' files in the directory
 	 * @access protected
+	 * @param string $folder Absolute path
 	 * @return boolean
 	 */
 	protected function includeFiles($folder){
@@ -95,6 +100,7 @@ class Folders {
 
 	/**
 	 * Return the list of all files in teh directory
+	 * @param boolean $fullpath True: We give the 
 	 * @return array
 	 */
 	public function loopFolder($fullpath=false){
@@ -131,6 +137,8 @@ class Folders {
 
 	/**
 	 * Create the directory if it does not exits
+	 * @param string $folder Absolute path
+	 * @param integer $chmod Linux permission
 	 * @return boolean
 	 */
 	public function createPath($folder, $chmod=0755){
@@ -145,6 +153,8 @@ class Folders {
 
 	/**
 	 * Create a symlink if it does not exist
+	 * @param string $target Absolute path of the symlink to create
+	 * @param string $link Absolute path of the original directory
 	 * @return boolean
 	 */
 	public function createSymlink($target, $link){

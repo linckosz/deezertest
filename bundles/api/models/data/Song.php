@@ -35,6 +35,7 @@ class Song extends ModelDeezer {
 	/**
 	 * Prepare the modle instance with the data sent via POST
 	 * @static
+	 * @param object $form The information received via POST
 	 * @return mixed Playlist / JSON string output
 	 */
 	public static function setItem($form){

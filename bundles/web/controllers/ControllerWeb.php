@@ -19,14 +19,14 @@ class ControllerWeb extends Controller {
 	public function web(){
 		$deezer = \Deezer::getInstance();
 		$get = \Deezer::getParam();
-		$deezer_code = '';
+		$deezer_authorized = false;
 		if(isset($get->code)){
-			$deezer_code = $get->code;
+			$deezer_authorized = $deezer->authorize();
 		}
 		$data = array(
 			'deezer_api_id' => $deezer->getApiID(),
 			'open_player' => $deezer->getTranslation(2000), //Open Player
-			'deezer_code' => $deezer_code,
+			'deezer_authorized' => $deezer_authorized,
 		);
 		$this->view('/bundles/web/view/web.html', $data);
 	}

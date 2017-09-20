@@ -7,13 +7,14 @@ namespace config;
 
 /**
  * Autoload a Class, the namespace must respect the directory tree
+ * @param string $name Name of the Class
  * @return void
  */
-function my_autoload($ClassName){
+function my_autoload($name){
 	$path = dirname(__FILE__).'/..';
-	$ClassName = str_replace('\\', '/', $ClassName);
-	if(file_exists($path.'/'.$ClassName.'.php')){
-		include_once($path.'/'.$ClassName.'.php');
+	$name = str_replace('\\', '/', $name);
+	if(file_exists($path.'/'.$name.'.php')){
+		include_once($path.'/'.$name.'.php');
 	}
 }
 

@@ -3,7 +3,7 @@
  * @author Bruno Martin <brunomartin@gmail.com>
  */
 
-use \libs\Folders;
+use \libs\Folder;
 use \libs\Render;
 use \libs\SQL;
 use \libs\STR;
@@ -138,6 +138,7 @@ class Deezer {
 
 	/**
 	 * Check if a data exists in the application instance
+	 * @param string $key The key array
 	 * @return boolean
 	 */
 	public function checkData($key){
@@ -149,6 +150,7 @@ class Deezer {
 
 	/**
 	 * Return a data stored in the application instance
+	 * @param string $key The key array
 	 * @return mixed
 	 */
 	public function getData($key){
@@ -160,6 +162,8 @@ class Deezer {
 
 	/**
 	 * Set a data stored in the application instance
+	 * @param string $key The key array
+	 * @param mixed $value The value to attach
 	 * @return mixed
 	 */
 	public function setData($key, $value){
@@ -185,19 +189,19 @@ class Deezer {
 
 	/**
 	 * Load all bundles requested
+	 * @param string[] $bundles An array of bundles's string
 	 * @return void
 	 */
 	public function loadBundles(array $bundles){
-		//Make sure that the deezer public directory exists (it should have been previously created by a LINUX command)
-		(new Folders)->createPath($this->getPath().'/public/deezer/');
+		//Make sure that /public/deezer exists and has the Write right by apache
 		foreach ($bundles as $bundle) {
 			//Only accept routes from preloaded bundles
-			$folder = new Folders($this->getPath().'/bundles/'.$bundle.'/routes');
+			$folder = new Folder($this->getPath().'/bundles/'.$bundle.'/routes');
 			$folder->includeRecursive();
 
 			//Include public files (create symlink at first launch only)
 			if(is_dir($this->getPath().'/bundles/'.$bundle.'/public') && !is_dir($this->getPath().'/public/deezer/'.$bundle)){
-				$folder = new Folders();
+				$folder = new Folder();
 				$folder->createSymlink($this->getPath().'/bundles/'.$bundle.'/public', $this->getPath().'/public/deezer/'.$bundle);
 			}
 		}
@@ -205,6 +209,9 @@ class Deezer {
 
 	/**
 	 * Set a GET route access
+	 * @param string $uri Current URI
+	 * @param string $controller Controller class name
+	 * @param string $function Controller method name
 	 * @return void
 	 */
 	public function setRouteGet(string $uri, string $controller, string $function){
@@ -213,6 +220,9 @@ class Deezer {
 
 	/**
 	 * Set a POST route access
+	 * @param string $uri Current URI
+	 * @param string $controller Controller class name
+	 * @param string $function Controller method name
 	 * @return void
 	 */
 	public function setRoutePost(string $uri, string $controller, string $function){
@@ -244,6 +254,7 @@ class Deezer {
 
 	/**
 	 * Set the output language
+	 * @param string $language The language we want to use
 	 * @return void
 	 */
 	public function setLanguage(string $language){
@@ -259,6 +270,8 @@ class Deezer {
 
 	/**
 	 * Return a string in the instance language
+	 * @param integer $id The SQL row ID of the sentence
+	 * @param boolean|string $format The output format
 	 * @return string
 	 */
 	public function getTranslation($id, $format=false){
@@ -279,6 +292,10 @@ class Deezer {
 		return $text;
 	}
 
+	/**
+	 * Return the Application ID key
+	 * @return string
+	 */
 	public function getApiID(){
 		if(isset($_SERVER['DEEZER_API_ID'])){
 			self::$deezer_api_id = $_SERVER['DEEZER_API_ID']; //The value is stored into NGINX configuration file 'nginx_fronf.conf'.
@@ -286,11 +303,58 @@ class Deezer {
 		return self::$deezer_api_id;
 	}
 
-	public function getSecret(){
+	/**
+	 * Return the Application Secret key
+	 * @access protected
+	 * @return string
+	 */
+	protected function getSecret(){
 		if(isset($_SERVER['DEEZER_SECRET'])){
 			self::$deezer_secret = $_SERVER['DEEZER_SECRET']; //The value is stored into NGINX configuration file 'nginx_fronf.conf'.
 		}
 		return self::$deezer_secret;
+	}
+
+	/**
+	 * Authorize the API
+	 * @param string $code Code receive
+	 * @return boolean|string Return the access token
+	 */
+	public function getToken($code){
+		$url = 'https://connect.deezer.com/oauth/access_token.php?app_id='.$this->getApiID().'&secret='.$this->getSecret().'&code='.$code;
+		//\libs\Watch::php($url, '$url', __FILE__, __LINE__, false, false, true);
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+		curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+		curl_setopt($ch, CURLOPT_FORBID_REUSE, true);
+		curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+
+		$verbose_show = true; //Use true for debugging purpose
+		if($verbose_show){
+			$verbose = fopen('php://temp', 'w+');
+			curl_setopt($ch, CURLOPT_VERBOSE, true);
+			curl_setopt($ch, CURLOPT_STDERR, $verbose);
+		}
+
+		$result = curl_exec($ch);
+
+		if($verbose_show){
+			\libs\Watch::php(curl_getinfo($ch), '$ch', __FILE__, __LINE__, false, false, true);
+			$error = '['.curl_errno($ch)."] => ".htmlspecialchars(curl_error($ch));
+			\libs\Watch::php($error, '$error', __FILE__, __LINE__, false, false, true);
+			rewind($verbose);
+			\libs\Watch::php(stream_get_contents($verbose), '$verbose', __FILE__, __LINE__, false, false, true);
+			fclose($verbose);
+			\libs\Watch::php(json_decode($result), '$result', __FILE__, __LINE__, false, false, true);
+		}
+
+		@curl_close($ch);
+		//return $result;
+		return false;
 	}
 
 }

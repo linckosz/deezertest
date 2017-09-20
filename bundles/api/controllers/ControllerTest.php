@@ -6,7 +6,7 @@
 namespace bundles\api\controllers;
 
 use \libs\Controller;
-use \libs\Folders;
+use \libs\Folder;
 use \libs\Render;
 use \libs\SQL;
 use \libs\STR;

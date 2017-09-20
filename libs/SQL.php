@@ -22,6 +22,7 @@ class SQL {
 	/**
 	 * Start the Databse connection
 	 * @static
+	 * @param string $database Name of the Database
 	 * @return PDO
 	 */
 	public static function getDatabase($database){

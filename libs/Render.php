@@ -23,6 +23,11 @@ class Render {
 
 	/**
 	 * Constructor
+	 * @param string $msg String information
+	 * @param mixed $data Data t send back to the client
+	 * @param boolean $error Precise if it's an error
+	 * @param integer $status HTTPS status code
+	 * @param boolean $http At true, we use a real HTTP status response
 	 * @return void
 	 */
 	public function __construct($msg, $data=null, $error=false, $status=200, $http=true){
@@ -35,6 +40,7 @@ class Render {
 
 	/**
 	 * Render the page with the appropriate header
+	 * @param boolean|string $format We tell in which format the page must be displayed
 	 * @return mixed String output
 	 */
 	public function render($format=false){
