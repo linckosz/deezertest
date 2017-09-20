@@ -49,11 +49,18 @@ class Deezer {
 	protected static $param = null;
 
 	/**
-	 * API ID of the application used for the domain deezer.bru
+	 * API ID of the application used for the domain
 	 * @access protected
 	 * @static
 	 */
-	protected static $deezer_api_id = '252622';
+	protected static $deezer_api_id = '';
+
+	/**
+	 * SECRET of the application used for the domain
+	 * @access protected
+	 * @static
+	 */
+	protected static $deezer_secret = '';
 
 	/**
 	 * The APi key to secure all POST requests to the API
@@ -272,9 +279,16 @@ class Deezer {
 
 	public function getApiID(){
 		if(isset($_SERVER['DEEZER_API_ID'])){
-			self::$deezer_api_id = $_SERVER['DEEZER_API_ID'];
+			self::$deezer_api_id = $_SERVER['DEEZER_API_ID']; //The value is stored into NGINX configuration file 'nginx_fronf.conf'.
 		}
 		return self::$deezer_api_id;
+	}
+
+	public function getSecret(){
+		if(isset($_SERVER['DEEZER_SECRET'])){
+			self::$deezer_secret = $_SERVER['DEEZER_SECRET']; //The value is stored into NGINX configuration file 'nginx_fronf.conf'.
+		}
+		return self::$deezer_secret;
 	}
 
 }

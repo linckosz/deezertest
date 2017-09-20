@@ -30,10 +30,9 @@ Installation
    - Include the path to these 2 files to your nginx confguration file.
 
 2. SSL
-They are self-certificated, and use wildcard subdomain *.deezer.bru .
-NGIX should point to them:
-   - '/_INSTALLATION/ssl.crt'
-   - '/_INSTALLATION/ssl.key'
+SSL for the somain brunodz.tk are available here:
+   - '/_INSTALLATION/brunodz.tk.crt'
+   - '/_INSTALLATION/brunodz.tk.key'
 
 3. SQL
    - Import the file '/_INSTALLATION/demo_deezer.sql', it will create the database and the user 'demo_deezer' used by the PHP application.
@@ -55,20 +54,9 @@ Need to go the the root directory of the application first.
 # service nginx restart
 ```
 
-6. DNS
-Because the domain is not registered, make sure the host file on the host machine is pointing to the correct IP.<br />
-Use your own IP if you installed the server, or use 120.234.18.50 to connect to my server in Shenzhen (China).
+6. DEEZER AUTHENTICATION
+ - In the file '/_INSTALLATION/nginx_front.conf', update both FastCGI variables DEEZER_API_ID and DEEZER_SECRET to your corresponding application values for authentication
 
-Windows => C:\Windows\System32\Hosts
-```
-120.234.18.50 deezer.bru
-120.234.18.50 www.deezer.bru
-120.234.18.50 api.deezer.bru
-```
-Linux => /etc/hosts
-```
-120.234.18.50 deezer.bru www.deezer.bru api.deezer.bru
-```
 
 NOTE
 --------------
@@ -107,13 +95,12 @@ Exercise 1
 
 Demo page
 --------------
-If you use 120.234.18.50 in your local DNS record, you can access to a demo page here:<br />
-https://api.deezer.bru/
+https://api.brunodz.tk
 
 1-1a
 --------------
 ```
-Request URL: https://api.deezer.bru/data
+Request URL: https://api.brunodz.tk/data
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -135,7 +122,7 @@ Request Payload (JSON string):
 1-1b
 --------------
 ```
-Request URL: https://api.deezer.bru/data
+Request URL: https://api.brunodz.tk/data
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -164,7 +151,7 @@ Exercise 2
 1-2a
 --------------
 ```
-Request URL: https://bruno.api.deezer.bru/playlist/favoritesongs
+Request URL: https://bruno.api.brunodz.tk/playlist/favoritesongs
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -188,7 +175,7 @@ Request Payload (JSON string):
 NOTE: We split into 2 commands here
 - 1st request => Add a song (which is actually the request)
 ```
-Request URL: https://bruno.api.deezer.bru/data
+Request URL: https://bruno.api.brunodz.tk/data
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -215,7 +202,7 @@ Request Payload (JSON string):
 ```
 - 2nd request => Grab the updated list
 ```
-Request URL: https://bruno.api.deezer.bru/playlist/favoritesongs
+Request URL: https://bruno.api.brunodz.tk/playlist/favoritesongs
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -239,7 +226,7 @@ Request Payload (JSON string):
 NOTE: We split into 2 commands here
 - 1st request => Add a song (which is actually the request)
 ```
-Request URL: https://bruno.api.deezer.bru/data
+Request URL: https://bruno.api.brunodz.tk/data
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -266,7 +253,7 @@ Request Payload (JSON string):
 ```
 - 2nd request => Grab the updated list
 ```
-Request URL: https://bruno.api.deezer.bru/playlist/favoritesongs
+Request URL: https://bruno.api.brunodz.tk/playlist/favoritesongs
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -302,8 +289,7 @@ L'idée est qu'à partir d'une playlist vous appartenant et en cours de lecture 
 
 Demo page
 --------------
-If you use 120.234.18.50 in your local DNS record, you can access to a demo page here:<br />
-https://deezer.bru/
+https://brunodz.tk
 
 Note
 -------------

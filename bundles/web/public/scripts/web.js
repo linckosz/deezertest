@@ -14,7 +14,7 @@ attachAction('load', window, function(){
 
 	//Initialize the SDK
 	DZ.init({
-		appId: web_app_id, //My API_ID is 252622. For development purpose, I stored it into NGINX configuration file 'nginx_fronf.conf'.
+		appId: web_app_id, //The API_ID stored into NGINX configuration file 'nginx_fronf.conf'.
 		channelUrl: top.location.protocol+'//'+document.domain+'/channel.html',
 		player: {
 			onload : function(){}
