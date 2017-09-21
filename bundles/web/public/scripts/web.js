@@ -331,8 +331,11 @@ var web_player = {
 	 * @return {void}
 	 */
 	next: function(){
-		DZ.player.playTracks(web_playlist.getSongs(), DZ.player.getCurrentIndex()+1);
-		web_player.refresh();
+		var index = DZ.player.getCurrentIndex();
+		if(index < web_playlist.getSongs().length-1){
+			DZ.player.playTracks(web_playlist.getSongs(), index+1);
+			web_player.refresh();
+		}
 	},
 
 	/**
@@ -340,8 +343,11 @@ var web_player = {
 	 * @return {void}
 	 */
 	previous: function(){
-		DZ.player.playTracks(web_playlist.getSongs(), DZ.player.getCurrentIndex()-1);
-		web_player.refresh();
+		var index = DZ.player.getCurrentIndex();
+		if(index){
+			DZ.player.playTracks(web_playlist.getSongs(), index-1);
+			web_player.refresh();
+		}
 	},
 
 };
