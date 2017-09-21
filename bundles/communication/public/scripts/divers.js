@@ -22,6 +22,11 @@ var ArrayToObject = function(arr){
 };
 
 /**
+ * Help to know if the device has touch capabiliy
+ */
+var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+
+/**
  * Keep track of events attached
  */
 var attachedEvent = {};

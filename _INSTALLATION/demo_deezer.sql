@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2017 at 04:19 PM
+-- Generation Time: Sep 21, 2017 at 07:49 AM
 -- Server version: 10.2.6-MariaDB
 -- PHP Version: 7.0.20
 
@@ -46,7 +46,7 @@ CREATE TABLE `playlist` (
 --
 
 INSERT INTO `playlist` (`id`, `md5`, `created`, `updated`, `deleted`, `user_id`, `name`, `favorite`) VALUES
-(1, '54d40443deff03162a6ebb057c8380c8', 1505576211897, 1505665047073, NULL, 1, 'ивт List! 好é', 1),
+(1, '54d40443deff03162a6ebb057c8380c8', 1505576211897, 1505879411855, NULL, 1, 'ивт List! 好é', 1),
 (2, '8c8af352208316681250ff99b1514e61', 1505576268268, 1505635029630, NULL, 2, 's7owju7dqi4x', 1),
 (3, '609b89e81bd77203c1d313c2961038e7', 1505576269092, 1505635029630, NULL, 2, 'r58ih3svym4665d', 0),
 (4, '5c3b22f07fd11dc7f4236c5acf5ea5e3', 1505576269767, 1505635029630, NULL, 2, 'c1vzz268n8f1', 0),
@@ -75,7 +75,7 @@ CREATE TABLE `playlist_x_song` (
 
 INSERT INTO `playlist_x_song` (`playlist_id`, `song_id`, `attached`) VALUES
 (1, 1, 1),
-(1, 5, 0),
+(1, 5, 1),
 (1, 10, 1),
 (1, 16, 1),
 (1, 30, 1),
@@ -181,7 +181,18 @@ INSERT INTO `translation` (`id`, `en`, `fr`) VALUES
 (1002, 'Get a song information (song.id:1)', 'Récupérer les données d\'une chanson (song.id:1)'),
 (1003, 'Get all songs from a user\'s favorite playlist (user.id:1)', 'Récupérer toutes les chansons de la liste favorite d\'un utilisateur (user.id:1)'),
 (1004, 'Add a song into a user\'s playlist (playlist.id:1 [the favorite] / song.id:5)', 'Ajouter une chanson dans une liste d\'un utilisateur (playlist.id:1 [la favorite] / song.id:5)'),
-(1005, 'Remove a song from a user\'s playlist (playlist.id:1 [the favorite] / song.id:5)', 'Supprimer une chanson d\'une liste d\'un utilisateur (playlist.id:1 [la favorite] / song.id:5)');
+(1005, 'Remove a song from a user\'s playlist (playlist.id:1 [the favorite] / song.id:5)', 'Supprimer une chanson d\'une liste d\'un utilisateur (playlist.id:1 [la favorite] / song.id:5)'),
+(2000, 'Open Player', 'Ouvrir le lecteur'),
+(2001, 'Fetching your information...', 'Récupération de vos informations ...'),
+(2002, 'Welcome back', 'Bienvenue'),
+(2003, 'Login cancelled or unauthorized.', 'Connexion annulée ou non autorisée.'),
+(2004, 'remove', 'supprimer'),
+(2005, 'Do you really want to remove this song from the playlist?', 'Voulez-vous vraiment enlever cette chanson de la liste?'),
+(2006, 'search', 'chercher'),
+(2007, 'add a \"Daft Punk\" song', 'ajouter une chanson de \"Daft Punk\"'),
+(2008, 'back to my playlist', 'retour à ma liste'),
+(2009, 'français', 'english'),
+(2010, 'fr', 'en');
 
 -- --------------------------------------------------------
 
@@ -265,7 +276,7 @@ ALTER TABLE `song`
 -- AUTO_INCREMENT for table `translation`
 --
 ALTER TABLE `translation`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1007;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2011;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -275,6 +286,7 @@ ALTER TABLE `user`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 
 
 GRANT USAGE ON *.* TO 'demo_deezer'@'192.168.1.%' IDENTIFIED BY PASSWORD '*BEEE119615AF49C9E32E89D5EC51152312F1309E';

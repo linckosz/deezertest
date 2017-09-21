@@ -15,11 +15,9 @@ bcmath bz2 calendar Core ctype curl date dba dom enchant exif fileinfo filter ft
 Test machine Operating system
 --------------
 All tests have been done using the following environment.<br />
-Even if the code has been thought cross-compatible, it needs more tests for other browsers.
+Even if the code has been thought cross-compatible, it needs to be tested on other browsers.
    - Windows 8.1 (64-bit) English
    - Google Chrome Version 60.0.3112.113 (Official Build) (64-bit)
-   - FireFox 55.0.3 (64-bit)
-   - IE 11.0.9600.18793
 
 Installation
 --------------
@@ -30,7 +28,7 @@ Installation
    - Include the path to these 2 files to your nginx confguration file.
 
 2. SSL
-SSL for the somain brunodz.tk are available here:
+SSL for the domain brunodz.tk are available here:
    - '/_INSTALLATION/brunodz.tk.crt'
    - '/_INSTALLATION/brunodz.tk.key'
 
@@ -105,12 +103,12 @@ Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
 {
-    "param":{    => Used store data we want to send to the API, the follofing pattern helps to regroup multiple CRUD operation on multiple models, it can help to save bandwidth and server CPU consumption by limiting the calls numbers.
+    "param":{    => Used store data we want to send to the API, the following pattern helps to regroup multiple CRUD operations on multiple models, it can help to save bandwidth and server CPU consumption by limiting the call numbers.
         "read":{    => Used to specified CRUD request, it can be "read", "delete", or "set" (which includes to create+update)  .
             "user":{    => The model name, it can be "user", "song", or "playlist".
                 "1":{    => Any string we want, it's just a key (unused on API) to store multiple objects.
                     "id":1,    => The object ID.
-                    "md5":"8f30ddb8d80ccd2b"    => The object MD5, it's used to secure CRUD operation ("delete & restore" need all the 32 characters, "create & update" need at least the 16 first characters, "read" needs at least the 8 first characters). The API will only give to the client the authorized length of the MD5. For instance, we can see that the user is only 16 characters because we don't allow deletion.
+                    "md5":"8f30ddb8d80ccd2b"    => The object MD5, it's used to secure CRUD operations ("delete & restore" need all the 32 characters, "create & update" need at least the 16 first characters, "read" needs at least the 8 first characters). The API will only give to the client the authorized length of the MD5. For instance, we can see that the user is only 16 characters because we don't allow deletion.
                 }
             }
         }
@@ -291,9 +289,28 @@ Demo page
 --------------
 https://brunodz.tk
 
-Note
+Notes
 -------------
-The SDK is not accessible from China, Deezer servers are blocked. This is why I had to store a copy of it into my application. '/public/scripts/dz.js'
+   - CDN servers are not accessible in China, "dz.js" and musics cannot be downloaded => It needs a VPN access.
+   - I had code issue 201 "Account permission restricted - waiting for payment." even if I could get an access_token using a premium account. The same issue appears in the "API explorer", not sure if it's related to my IP location.
 
 2-1
 --------------
+Because I was not able yet to solve the access issue, I did created a fake playlist (hardcoded) to simulae some operations.<br />
+I prepared some playlist commands in the file '\bundles\web\public\scripts\web.js', object 'web_action', but without being able to work with any response, I cannot confirm if it work properly.
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+--------------
+
+Conclusion
+==============
+Thank you for taking the time to consider my candidature as a Senior Developer.
+I wish that you will be able to see the skills you are looking in this source code.
+
+Regards,
+
+Bruno Martin

@@ -266,6 +266,7 @@ class Deezer {
 		if($language!='id' && in_array($language, $columns)){
 			self::$language = $language;
 		}
+		return self::$language;
 	}
 
 	/**
@@ -365,7 +366,6 @@ class Deezer {
 			@curl_close($ch);
 
 			if(isset($result['access_token'])){
-				$this->test($result['access_token']);
 				return $_SESSION['deezer_access_token'] = $result['access_token'];
 			}
 		}
@@ -373,43 +373,44 @@ class Deezer {
 		return false;
 	}
 
+	/**
+	 * A method used for debugging
+	 * @param string $access_token Access token
+	 * @return void
+	 */
 	public function test($access_token){
-		
-			$url = 'https://api.deezer.com/user/me?access_token='.$access_token;
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-			curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
-			curl_setopt($ch, CURLOPT_FORBID_REUSE, true);
-			curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+		$url = 'https://api.deezer.com/user/me?access_token='.$access_token;
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+		curl_setopt($ch, CURLOPT_FORBID_REUSE, true);
+		curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
 
-			$verbose_show = true; //Use true for debugging purpose
-			if($verbose_show){
-				$verbose = fopen('php://temp', 'w+');
-				curl_setopt($ch, CURLOPT_VERBOSE, true);
-				curl_setopt($ch, CURLOPT_STDERR, $verbose);
-			}
+		$verbose_show = true; //Use true for debugging purpose
+		if($verbose_show){
+			$verbose = fopen('php://temp', 'w+');
+			curl_setopt($ch, CURLOPT_VERBOSE, true);
+			curl_setopt($ch, CURLOPT_STDERR, $verbose);
+		}
 
-			//Parse the GET response into an array
-			$result = json_decode(curl_exec($ch));
+		//Parse the GET response into an array
+		$result = json_decode(curl_exec($ch));
 
-			if($verbose_show){
-				\libs\Watch::php(curl_getinfo($ch), '$ch', __FILE__, __LINE__, false, false, true);
-				$error = '['.curl_errno($ch)."] => ".htmlspecialchars(curl_error($ch));
-				\libs\Watch::php($error, '$error', __FILE__, __LINE__, false, false, true);
-				rewind($verbose);
-				\libs\Watch::php(stream_get_contents($verbose), '$verbose', __FILE__, __LINE__, false, false, true);
-				fclose($verbose);
-				\libs\Watch::php($result, '$result', __FILE__, __LINE__, false, false, true);
-			}
+		if($verbose_show){
+			\libs\Watch::php(curl_getinfo($ch), '$ch', __FILE__, __LINE__, false, false, true);
+			$error = '['.curl_errno($ch)."] => ".htmlspecialchars(curl_error($ch));
+			\libs\Watch::php($error, '$error', __FILE__, __LINE__, false, false, true);
+			rewind($verbose);
+			\libs\Watch::php(stream_get_contents($verbose), '$verbose', __FILE__, __LINE__, false, false, true);
+			fclose($verbose);
+			\libs\Watch::php($result, '$result', __FILE__, __LINE__, false, false, true);
+		}
 
-			@curl_close($ch);
-
-
-		return false;
+		@curl_close($ch);
 	}
 
 }

@@ -12,6 +12,14 @@ require_once $path.'/deezer.php';
 require_once $path.'/config/Error.php';
 
 $deezer = \Deezer::getInstance();
-//$deezer->setLanguage('fr'); //Default is English
+
+//Change language, teh default is English
+$param = \Deezer::getParam();
+if(isset($param->lang)){
+	$_SESSION['language'] = $deezer->setLanguage($param->lang); 
+} else if(isset($_SESSION['language'])){
+	$_SESSION['language'] = $deezer->setLanguage($_SESSION['language']);
+}
+
 $deezer->loadBundles(array('web', 'communication'));
 $deezer->launch();

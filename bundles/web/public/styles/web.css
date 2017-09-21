@@ -92,10 +92,11 @@ html {
 }
 
 .web_dz_root {
-	
+	visibility: hidden;
+	z-index: 0;
 }
 
-#web_app_login_button {
+#web_app_login_button, #web_search {
 	display: inline-block;
 	position: absolute;
 	margin: auto;
@@ -113,18 +114,28 @@ html {
 	background-color: rgba(255, 255, 255, 0.15);
 }
 
-#web_app_login_button:hover {
+#web_app_login_button:hover, #web_search:hover {
 	color: rgba(255, 255, 255, 0.80);
 	border: 1px solid rgba(255, 255, 255, 0.80);
 	background-color: rgba(255, 255, 255, 0.20);
 }
 
-#web_app_login_button:active {
+#web_app_login_button:active, #web_search:active {
 	color: rgba(255, 255, 255, 1);
 	border: 1px solid rgba(255, 255, 255, 1);
 	background-color: rgba(255, 255, 255, 0.30);
 }
 
+#web_search {
+	display: table;
+	position: absolute;
+	margin: 0;
+	left: 6px;
+	top: 166px;
+	padding: 4px 6px;
+	width: auto;
+	font-weight: 12px;
+}
 
 
 #web_page_player_cd_control {
@@ -168,6 +179,30 @@ html {
 	width: 100%;
 }
 
+#web_page_language {
+	display: inline-block;
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	padding: 2px 6px;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.65);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	border-radius: 2px;
+	cursor: pointer;
+	font-size: 11px;
+	background-color: rgba(255, 255, 255, 0.15);
+	z-index: 5;
+}
+#web_page_language:hover {
+	color: rgba(255, 255, 255, 0.80);
+	background-color: rgba(255, 255, 255, 0.20);
+}
+#web_page_language:active {
+	color: rgba(255, 255, 255, 1);
+	background-color: rgba(255, 255, 255, 0.30);
+}
+
 #web_page_player {
 	position: absolute;
 	z-index: 2;
@@ -179,7 +214,7 @@ html {
 	border: 1px solid rgba(220, 220, 220, 0.45);
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: contain;
+	background-size: 142px 142px; /*We cover a bit bigger*/
 }
 
 #web_page_player_cd {
@@ -239,6 +274,17 @@ html {
 	background-color: rgba(141, 177, 191, 0.25);
 }
 
+#web_page_player_song_track_click {
+	position: absolute;
+	cursor: pointer;
+	left: 0;
+	top: -5px;
+	width: 100%;
+	height: 12px;
+	background-color: transparent;
+	z-index: 2;
+}
+
 #web_page_player_song_track_ball {
 	position: absolute;
 	margin-top: -7px;
@@ -248,7 +294,11 @@ html {
 	cursor: W-resize;
 	border-radius: 100%;
 	background-color: #DCDCDC;
-	z-index: 2;
+	z-index: 3;
+}
+
+.web_page_player_song_track_default {
+	cursor: inherit !important;
 }
 
 #web_page_playlist {
@@ -260,7 +310,31 @@ html {
 	overflow-y: auto;
 }
 
+.web_page_playlist_hide {
+	visibility: hidden;
+	height: 0;
+}
+
+.web_playlist_line_add_song, .web_playlist_line_back_playlist {
+	position: relative;
+	cursor: pointer;
+	width: 70%;
+	padding: 12px 6px;
+	margin-left: 15%;
+	margin-bottom: 6px;
+	background-color: rgba(255, 255, 255, 0.05);
+	font-weight: 28px;
+	text-align: center;
+}
+.web_playlist_line_add_song:hover, .web_playlist_line_back_playlist:hover {
+	background-color: rgba(255, 255, 255, 0.15);
+}
+.web_playlist_line_add_song:active, .web_playlist_line_back_playlist:active {
+	background-color: rgba(255, 255, 255, 0.20);
+}
+
 .web_playlist_line {
+	position: relative;
 	cursor: pointer;
 	width: 70%;
 	padding: 6px;
@@ -268,23 +342,48 @@ html {
 	min-height: 52px;
 	margin-bottom: 6px;
 	background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgba(2, 55, 98, 0.02));
+	border-top: 2px solid rgba(255, 255, 255, 0.04);
 }
 .web_playlist_line:hover {
 	background-image: none;
 	background-color: rgba(255, 255, 255, 0.05);
 }
-.web_playlist_line:active {
+.web_playlist_line:active, .web_playlist_line_playing {
 	background-image: none;
-	background-color: rgba(255, 255, 255, 0.10);
+	background-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.web_playlist_line_plus {
+	position: absolute;
+	visibility: hidden;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	border: 1px solid rgba(255, 255, 255, 0.20);
+	background-color: rgba(255, 255, 255, 0.20);
+	font-size: 52px;
+	text-align: center;
+	vertical-align: middle;
+}
+.web_playlist_line:hover > .web_playlist_line_plus {
+	visibility: visible;
+}
+.web_playlist_line:active > .web_playlist_line_plus {
+	visibility: visible;
+	background-color: rgba(255, 255, 255, 0.40);
 }
 
 .web_playlist_line_picture {
 	float: left;
 	width: 52px;
 	height: 52px;
+	margin-right: 10px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 .web_playlist_line_content {
@@ -292,11 +391,11 @@ html {
 }
 
 .web_playlist_line_content_top {
-
+	margin-top: 2px;
 }
 
 .web_playlist_line_content_top_title {
-
+	font-size: 18px;
 }
 
 .web_playlist_line_content_top_duration {
@@ -304,7 +403,84 @@ html {
 }
 
 .web_playlist_line_content_by {
+	font-size: 12px;
+	filter: alpha(opacity=80);
+	opacity: 0.80;
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+}
 
+.web_playlist_line_remove {
+	display: none;
+	position: absolute;
+	font-size: 12px;
+	right: 6px;
+	bottom: 6px;
+	cursor: pointer;
+	filter: alpha(opacity=60);
+	opacity: 0.60;
+	-moz-opacity: 0.60;
+	-khtml-opacity: 0.60;
+}
+.web_playlist_line_remove:hover {
+	filter: alpha(opacity=80);
+	opacity: 0.80;
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+}
+.web_playlist_line_remove:active {
+	filter: alpha(opacity=100);
+	opacity: 1.00;
+	-moz-opacity: 1.00;
+	-khtml-opacity: 1.00;
+}
+.web_playlist_line:hover .web_playlist_line_remove {
+	display: block;
+}
+.web_playlist_line_remove_force {
+	display: block !important;
+}
+
+#web_page_player_cd_control_prev, #web_page_player_cd_control_next {
+	position: absolute;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+	filter: alpha(opacity=80);
+	opacity: 0.80;
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+}
+#web_page_player_cd_control_prev:hover, #web_page_player_cd_control_next:hover {
+	filter: alpha(opacity=90);
+	opacity: 0.90;
+	-moz-opacity: 0.90;
+	-khtml-opacity: 0.90;
+}
+#web_page_player_cd_control_prev:active, #web_page_player_cd_control_next:active {
+	filter: alpha(opacity=100);
+	opacity: 1.00;
+	-moz-opacity: 1.00;
+	-khtml-opacity: 1.00;
+}
+
+#web_page_player_cd_control_prev {
+	right: 8%;
+	margin-right: 36px;
+	bottom: 48px;
+}
+
+#web_page_player_cd_control_next {
+	right: 8%;
+	bottom: 48px;
+}
+
+#web_page_player_cd_control_prev.blocked, #web_page_player_cd_control_next.blocked {
+	cursor: inherit !important;
+	filter: alpha(opacity=30) !important;
+	opacity: 0.30 !important;
+	-moz-opacity: 0.30 !important;
+	-khtml-opacity: 0.30 !important;
 }
 
 /**
@@ -329,6 +505,7 @@ html {
 	#web_page_player {
 		height: 218px;
 		width: 218px;
+		background-size: 222px 222px;
 	}
 	#web_page_player_cd {
 		top: 86px;
@@ -340,5 +517,9 @@ html {
 	}
 	#web_page_playlist {
 		border-top-width: 244px;
+	}
+
+	#web_search {
+		top: 248px;
 	}
 }
