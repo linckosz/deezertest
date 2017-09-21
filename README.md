@@ -275,7 +275,7 @@ Request Payload (JSON string):
 <br />
 <br />
 <br />
---------------
+
 
 Sujet 2 : Playlist mise à jour à la volée ( sujet optionnel)
 ==============
@@ -304,7 +304,6 @@ I prepared some playlist commands in the file '\bundles\web\public\scripts\web.j
 <br />
 <br />
 <br />
---------------
 
 Conclusion
 ==============
