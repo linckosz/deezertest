@@ -296,7 +296,7 @@ Notes
 
 2-1
 --------------
-Because I was not able yet to solve the access issue, I did created a fake playlist (hardcoded) to simulae some operations.<br />
+I was not able yet to solve the access issue, so I did created a fake playlist (hardcoded) to simulae some operations.<br />
 I prepared some playlist commands in the file '\bundles\web\public\scripts\web.js', object 'web_action', but without being able to work with any response, I cannot confirm if it work properly.
 <br />
 <br />
