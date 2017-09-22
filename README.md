@@ -1,7 +1,7 @@
 DEEZER test By Bruno Martin (September 14th, 2017)
 ==============
 
-Sever machine Operating system
+Server machine Operating system
 --------------
 The application has been developed and tested on the following system (LNMP):
    - CentOS 6.9 (64bit)
@@ -39,7 +39,7 @@ SSL for the domain brunodz.tk are available here:
    - If the logic code (alias PHP) is well written, I prefer to not use foreign keys, they can drastically slow down the application.
    - To keep track of Create/Update/Delete operation, I do not use Timestamp because a gap of a second is to big and can be annoying for users when sorting mixed models. Instead, I use an interger giving milliseconds of UNIX time.
 
-4. Database connecton
+4. Database connection
    - The file '/config/Database.php' contains connection information for the PHP application. If any issue with the user 'demo_deezer', just use the root user.
 
 5. LINUX permission
@@ -72,7 +72,7 @@ Here are some advantages of this configuration:
    - It accepts connection to multiple databases.
    - All Errors, JS and PHP, are stored in the directories '/logs/js' and '/logs/php'.
    - By using the method '/libs/Watch::php()', we can watch PHP variable, data are stored in the directory '/logs'.
-   - Internationalization support, uncomment "$deezer->setLanguage('fr');" in '/front.php' and '/back.php' to use French.
+   - Internationalization support, uncomment "$deezer->setLanguage('fr');" in '/back.php' to use French for the subject No1. There is a button to switch the language on the UI of subject No2.
 <br />
 <br />
 <br />
@@ -297,7 +297,7 @@ Notes
 2-1
 --------------
 I was not able yet to solve the access issue, so I did created a fake playlist (hardcoded) to simulae some operations.<br />
-I prepared some playlist commands in the file '\bundles\web\public\scripts\web.js', object 'web_action', but without being able to work with any response, I cannot confirm if it work properly.
+I prepared some playlist commands in the file '\bundles\web\public\scripts\web.js', object 'web_action', but without being able to work with any response, I cannot confirm if it works properly.
 <br />
 <br />
 <br />
