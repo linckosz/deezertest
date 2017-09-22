@@ -307,8 +307,8 @@ I prepared some playlist commands in the file '\bundles\web\public\scripts\web.j
 
 Conclusion
 ==============
-Thank you for taking the time to consider my candidature as a Senior Developer.
-I wish that you will be able to see the skills you are looking in this source code.
+Thank you for taking the time to consider my candidature as a Senior Developer.<br />
+I wish that you will be able to see the skills you are looking for in this source code.
 
 Regards,
 
