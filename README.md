@@ -149,7 +149,7 @@ Exercise 2
 1-2a
 --------------
 ```
-Request URL: https://bruno.api.brunodz.tk/playlist/favoritesongs
+Request URL: https://api.brunodz.tk/playlist/favoritesongs
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -173,7 +173,7 @@ Request Payload (JSON string):
 NOTE: We split into 2 commands here
 - 1st request => Add a song (which is actually the request)
 ```
-Request URL: https://bruno.api.brunodz.tk/data
+Request URL: https://api.brunodz.tk/data
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -200,7 +200,7 @@ Request Payload (JSON string):
 ```
 - 2nd request => Grab the updated list
 ```
-Request URL: https://bruno.api.brunodz.tk/playlist/favoritesongs
+Request URL: https://api.brunodz.tk/playlist/favoritesongs
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -224,7 +224,7 @@ Request Payload (JSON string):
 NOTE: We split into 2 commands here
 - 1st request => Add a song (which is actually the request)
 ```
-Request URL: https://bruno.api.brunodz.tk/data
+Request URL: https://api.brunodz.tk/data
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
@@ -251,7 +251,7 @@ Request Payload (JSON string):
 ```
 - 2nd request => Grab the updated list
 ```
-Request URL: https://bruno.api.brunodz.tk/playlist/favoritesongs
+Request URL: https://api.brunodz.tk/playlist/favoritesongs
 Request Method: POST
 Remote Address: 120.234.18.50:443
 Request Payload (JSON string):
