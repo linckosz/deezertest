@@ -27,7 +27,7 @@ Installation
    - Make sure to adapt those files according to your server, especially pathes.
    - Include the path to these 2 files to your nginx confguration file.
 
-2. SSL
+2. SSL<br />
 SSL for the domain brunodz.tk are available here:
    - '/_INSTALLATION/brunodz.tk.crt'
    - '/_INSTALLATION/brunodz.tk.key'
@@ -42,7 +42,7 @@ SSL for the domain brunodz.tk are available here:
 4. Database connection
    - The file '/config/Database.php' contains connection information for the PHP application. If any issue with the user 'demo_deezer', just use the root user.
 
-5. LINUX permission
+5. LINUX permission<br />
 Launch a LINUX bash command to insure all permissions are setup correctly.<br />
 Need to go the the root directory of the application first.
 ```
@@ -53,7 +53,7 @@ Need to go the the root directory of the application first.
 ```
 
 6. DEEZER AUTHENTICATION
- - In the file '/_INSTALLATION/nginx_front.conf', update both FastCGI variables DEEZER_API_ID and DEEZER_SECRET to your corresponding application values for authentication
+   - In the file '/_INSTALLATION/nginx_front.conf', update both FastCGI variables DEEZER_API_ID and DEEZER_SECRET to your corresponding application values for authentication
 
 
 NOTE
@@ -296,7 +296,7 @@ Notes
 
 2-1
 --------------
-I was not able yet to solve the access issue, so I did created a fake playlist (hardcoded) to simulae some operations.<br />
+I was not able yet to solve the access issue, so I did created a fake playlist (hardcoded) to simulate some operations.<br />
 I prepared some playlist commands in the file '\bundles\web\public\scripts\web.js', object 'web_action', but without being able to work with any response, I cannot confirm if it works properly.
 <br />
 <br />
