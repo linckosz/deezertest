@@ -37,7 +37,7 @@ attachAction('load', window, function(){
 				attachAction('click', 'web_app_login_button', function(){
 
 					//(prefered method) This method avoid a the use of a popup, but it refresh the main page, and need to assign DZ.token and DZ.tokenExpire manually
-					window.location.href = 'https://connect.deezer.com/oauth/auth.php?app_id='+web_app_id+'&redirect_uri='+top.location.protocol+'//'+document.domain+'&perms=basic_access,email,manage_library,offline_access';
+					window.location.href = 'https://connect.deezer.com/oauth/auth.php?app_id='+web_app_id+'&redirect_uri='+top.location.protocol+'//'+document.domain+'&perms=basic_access,email,manage_library,offline_access,delete_library';
 
 					//Popup method
 					/*
@@ -80,7 +80,7 @@ var web_action = {
 			if(typeof response.data != 'undefined'){
 				var data = response.data;
 			} else {
-				data = fake.favorites; //Simulation
+				var data = fake.favorites; //Simulation
 			}
 			web_playlist.load(data);
 		});
@@ -105,7 +105,7 @@ var web_action = {
 
 	add_song: function(song_id){
 		fake.add(song_id); //Simulation
-		DZ.api('/user/me/tracks', 'POST', song_id, function(response){
+		DZ.api('/user/me/tracks', 'POST', {track_id: song_id}, function(response){
 			console.log(response);
 			//Refresh the list
 			web_action.load_favorite();
@@ -114,7 +114,7 @@ var web_action = {
 
 	remove_song: function(song_id){
 		fake.remove(song_id); //Simulation
-		DZ.api('/user/me/tracks', 'DELETE', song_id, function(response){
+		DZ.api('/user/me/tracks', 'DELETE', {track_id: song_id}, function(response){
 			console.log(response);
 			//Refresh the list
 			web_action.load_favorite();
